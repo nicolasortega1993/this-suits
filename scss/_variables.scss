@@ -1,0 +1,101 @@
+// =========================================================
+// THIS SUITS — Variables de marca para recompilar Bootstrap 5
+// =========================================================
+// Paleta definida en el TP1 (Justificación de Diseño):
+//   - Azul oscuro casi negro -> fondo principal (premium / formal)
+//   - Rojo oscuro            -> color de acción (botones primarios, logo)
+//   - Azul grisáceo          -> textos secundarios
+//   - Blanco                 -> texto principal sobre fondo oscuro
+//   - Azul marino            -> tarjetas / superficies internas
+
+$ts-navy-950: #0d1b2e;   // fondo principal
+$ts-navy-800: #16263c;   // tarjetas / superficies internas
+$ts-navy-700: #1f3350;   // bordes y superficies sobre navy-800
+$ts-red-700:  #8a1f1f;   // rojo oscuro de marca (botones, fondos con texto blanco)
+$ts-red-600:  #a8281f;   // hover del rojo de marca (sobre fondos claros)
+// Mismo matiz que $ts-red-700 pero aclarado: necesario para texto en rojo
+// directamente sobre el fondo navy (un rojo oscuro sobre navy no llega al
+// contraste mínimo WCAG AA). Verificado: 4.8:1 sobre $ts-navy-950.
+$ts-red-accent-on-dark: #e25b48;
+$ts-slate-400:#7c8aa3;   // azul grisáceo claro (texto secundario sobre fondo oscuro)
+// Variante oscurecida del mismo matiz: la utilidad .text-secondary de
+// Bootstrap se usa siempre sobre fondo blanco en este sitio, y
+// $ts-slate-400 no alcanza el contraste mínimo WCAG AA (4.5:1) ahí.
+// Verificado: 7.08:1 sobre blanco.
+$ts-slate-700:#4f5969;
+$ts-white:    #f5f6f8;   // blanco cálido (texto principal)
+
+// ---- Mapeo a variables de Bootstrap --------------------
+$primary:       $ts-red-700;
+$secondary:     $ts-slate-700;
+$dark:          $ts-navy-950;
+$light:         $ts-white;
+$body-bg:       $ts-white;
+$body-color:    #1b2230;
+
+// Fondo e texto específicos para zonas oscuras (hero, footer, header)
+$ts-dark-bg:     $ts-navy-950;
+$ts-dark-surface:$ts-navy-800;
+$ts-dark-border: $ts-navy-700;
+$ts-dark-text:   $ts-white;
+$ts-dark-muted:  $ts-slate-400;
+
+// ---- Tipografía ------------------------------------------
+// Serif con carácter para titulares (estética de sastrería)
+// Sans geométrica para interfaz (botones, nav, formularios, body)
+$font-family-serif:  "Cormorant Garamond", "Georgia", serif;
+$font-family-sans:   "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+$font-family-base:    $font-family-sans;
+$headings-font-family: $font-family-serif;
+$headings-font-weight: 600;
+$headings-color:      null; // hereda color de contexto (oscuro o claro)
+
+// ---- Forma: esquinas rectas, sin redondeos --------------
+// Decisión de diseño del TP1: botones completamente rectos
+// para una estética de sastrería formal y precisa.
+$border-radius:           0;
+$border-radius-sm:        0;
+$border-radius-lg:        0;
+$border-radius-xl:        0;
+$border-radius-pill:      0;
+$btn-border-radius:       0;
+$btn-border-radius-sm:    0;
+$btn-border-radius-lg:    0;
+$card-border-radius:      0;
+$input-border-radius:     0;
+$input-border-radius-sm:  0;
+$input-border-radius-lg:  0;
+
+// ---- Botones: tipografía con tracking, sin transform forzado
+$btn-font-weight:        600;
+$btn-padding-y:           .7rem;
+$btn-padding-x:           1.75rem;
+$btn-font-size:            .85rem;
+
+// ---- Layout general ---------------------------------------
+$enable-rounded:   true; // se respeta el valor 0 definido arriba
+$enable-shadows:   false;
+$enable-negative-margins: true;
+
+// Contenedores algo más generosos para el aire que pide el diseño
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1280px
+);
+
+// Links
+$link-color: $ts-red-700;
+$link-hover-color: $ts-red-600;
+$link-decoration: none;
+
+// Navbar oscuro reutilizando el navy de marca
+$navbar-dark-color:                 rgba($ts-white, .75);
+$navbar-dark-hover-color:           $ts-white;
+$navbar-dark-active-color:          $ts-white;
+
+// Focus visible accesible (se mantiene contraste en fondo oscuro)
+$focus-ring-color: rgba($ts-red-700, .45);

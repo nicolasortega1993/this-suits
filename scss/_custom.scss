@@ -1,0 +1,296 @@
+// =========================================================
+// THIS SUITS — Estilos de componentes propios
+// Se apoyan en las variables de _variables.scss y en las
+// utilidades de Bootstrap. Acá solo lo que Bootstrap no
+// resuelve por sí solo: hero, tarjetas oscuras, sidebar de
+// filtros, placeholders de imagen, footer, etc.
+// =========================================================
+
+// ---------------------------------------------------------
+// Utilidades de superficie oscura reutilizables
+// ---------------------------------------------------------
+.bg-ts-dark      { background-color: $ts-dark-bg; }
+.bg-ts-surface   { background-color: $ts-dark-surface; }
+.text-ts-light   { color: $ts-dark-text; }
+.text-ts-muted   { color: $ts-dark-muted; }
+.border-ts       { border-color: $ts-dark-border !important; }
+
+// ---------------------------------------------------------
+// Header / Navbar
+// ---------------------------------------------------------
+// El navbar usa position fixed-top: compensamos con padding-top
+// en body para que ningún contenido quede tapado debajo, en
+// cualquier breakpoint (la altura real del navbar varía un
+// poco entre mobile/desktop, por eso el valor incluye margen).
+:root { --ts-navbar-height: 72px; }
+body { padding-top: var(--ts-navbar-height); }
+
+.ts-navbar {
+  background-color: $ts-dark-bg;
+  border-bottom: 1px solid $ts-dark-border;
+  transition: box-shadow .2s ease, padding .2s ease;
+
+  .navbar-brand {
+    font-family: $font-family-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: $ts-dark-text;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+
+  .nav-link {
+    font-size: .85rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding-inline: 1rem !important;
+  }
+
+  // Estado aplicado por JS (main.js) al hacer scroll
+  &.is-scrolled {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  }
+}
+
+.ts-logo-mark {
+  width: 34px;
+  height: 34px;
+  background-color: $ts-red-700;
+  color: $ts-white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family-serif;
+  font-weight: 700;
+  font-size: .95rem;
+  flex-shrink: 0;
+}
+
+// ---------------------------------------------------------
+// Hero (portada)
+// ---------------------------------------------------------
+.ts-hero {
+  background-color: $ts-dark-bg;
+  color: $ts-dark-text;
+  padding-block: clamp(3.5rem, 8vw, 7rem);
+
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: .01em;
+  }
+
+  .lead {
+    color: $ts-dark-muted;
+    font-family: $font-family-sans;
+  }
+}
+
+// ---------------------------------------------------------
+// Placeholders de imagen (consistentes con los mockups del TP1:
+// bloques grises con ícono, en vez de fotografía real)
+// ---------------------------------------------------------
+.ts-placeholder {
+  background-color: rgba($ts-slate-400, .15);
+  border: 1px solid rgba($ts-slate-400, .3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $ts-slate-400;
+  min-height: 220px;
+
+  svg { width: 2.5rem; height: 2.5rem; opacity: .6; }
+}
+
+.ts-placeholder--dark {
+  background-color: rgba($ts-white, .04);
+  border-color: rgba($ts-white, .12);
+  color: rgba($ts-white, .4);
+}
+
+// ---------------------------------------------------------
+// Tarjetas de producto (sección Catálogo, reutilizadas en Inicio)
+// ---------------------------------------------------------
+.ts-card-product {
+  border: 1px solid #e4e4e7;
+
+  .ts-placeholder { min-height: 260px; }
+
+  .card-body { padding: 1rem 1.1rem 1.25rem; }
+
+  .ts-card-title {
+    font-family: $font-family-serif;
+    font-size: 1.05rem;
+    margin-bottom: .25rem;
+  }
+
+  .badge {
+    border-radius: 0;
+    font-weight: 600;
+    letter-spacing: .03em;
+  }
+}
+
+// ---------------------------------------------------------
+// Pasos del proceso ("Así de simple funciona")
+// ---------------------------------------------------------
+.ts-step-number {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%; // único acento circular: distingue paso/número de producto
+  background-color: $ts-red-700;
+  color: $ts-white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family-serif;
+  font-weight: 700;
+}
+
+// ---------------------------------------------------------
+// Banda CTA de alquiler
+// ---------------------------------------------------------
+.ts-cta-banner {
+  background-color: $ts-dark-bg;
+  color: $ts-dark-text;
+
+  .ts-cta-highlight { color: $ts-red-accent-on-dark; }
+}
+
+// ---------------------------------------------------------
+// Franja de confianza (reseñas / social proof)
+// ---------------------------------------------------------
+.ts-trust-strip {
+  background-color: #eef0f3;
+  font-size: .9rem;
+}
+
+// ---------------------------------------------------------
+// Footer
+// ---------------------------------------------------------
+.ts-footer {
+  background-color: $ts-dark-bg;
+  color: $ts-dark-muted;
+  border-top: 1px solid $ts-dark-border;
+
+  a { color: $ts-dark-muted; }
+  a:hover { color: $ts-dark-text; }
+
+  .ts-footer-heading {
+    color: $ts-dark-text;
+    font-size: .8rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+
+// ---------------------------------------------------------
+// Breadcrumb sobre fondo oscuro (.bg-ts-surface)
+// Se sobrescriben las variables CSS del propio componente
+// (forma recomendada en Bootstrap 5.3) en vez de pelear por
+// especificidad contra .breadcrumb-item.active.
+// ---------------------------------------------------------
+.bg-ts-surface .breadcrumb {
+  --bs-breadcrumb-divider-color: #{$ts-dark-muted};
+  --bs-breadcrumb-item-active-color: #{$ts-dark-text};
+}
+
+// ---------------------------------------------------------
+// Página Contacto: sidebar de filtros de canal/horario
+// ---------------------------------------------------------
+.ts-contact-hero {
+  background-color: $ts-dark-surface;
+  color: $ts-dark-text;
+  padding-block: 3rem;
+
+  h1 { font-size: clamp(2rem, 4vw, 2.75rem); }
+}
+
+.ts-filter-group {
+  .ts-filter-heading {
+    font-size: .75rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: $ts-slate-700; // se usa sobre fondo claro: necesita el tono AA-safe
+    margin-bottom: .6rem;
+  }
+
+  .form-check-label { font-size: .92rem; }
+}
+
+.ts-contact-panel {
+  background-color: $ts-dark-surface;
+  border: 1px solid $ts-dark-border;
+  color: $ts-dark-text;
+}
+
+.ts-social-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $ts-dark-border;
+  color: $ts-dark-text;
+
+  &:hover { background-color: $ts-dark-border; }
+}
+
+// Form controls sobre fondo oscuro (panel "Enviános un mensaje")
+.ts-form-dark {
+  .form-label {
+    font-size: .75rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: $ts-dark-muted;
+  }
+
+  .form-control {
+    background-color: rgba($ts-white, .04);
+    border-color: $ts-dark-border;
+    color: $ts-dark-text;
+
+    &::placeholder { color: rgba($ts-white, .35); }
+
+    &:focus {
+      background-color: rgba($ts-white, .06);
+      border-color: $ts-red-700;
+      color: $ts-dark-text;
+      box-shadow: 0 0 0 .2rem rgba($ts-red-700, .25);
+    }
+
+    // Estado aplicado por JS al validar en vivo
+    &.is-valid-live { border-color: #4f9d6e; }
+    &.is-invalid-live { border-color: #c0463c; }
+  }
+}
+
+// ---------------------------------------------------------
+// Botón "volver arriba" (controlado por evento de scroll en JS)
+// ---------------------------------------------------------
+.ts-back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: $ts-red-700;
+  color: $ts-white;
+  border: none;
+  z-index: 1040;
+  opacity: 0;
+  transition: opacity .25s ease;
+
+  &.is-visible { display: inline-flex; opacity: 1; }
+}
+
+// Respeta preferencia de movimiento reducido
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

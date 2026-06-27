@@ -1,0 +1,13 @@
+{
+  "name": "this-suits-web",
+  "version": "1.0.0",
+  "description": "This Suits — sitio web (TP2, Desarrollo de Sitios Web). Tema de Bootstrap 5 personalizado y recompilado con Sass.",
+  "private": true,
+  "scripts": {
+    "build:css": "sass scss/styles.scss css/styles.css --style=compressed --no-source-map"
+  },
+  "devDependencies": {
+    "bootstrap": "^5.3.8",
+    "sass": "^1.101.0"
+  }
+}
