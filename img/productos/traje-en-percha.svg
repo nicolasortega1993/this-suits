@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img">
+  <rect width="800" height="500" fill="#0d1b2e"/>
+
+  <!-- percha -->
+  <circle cx="400" cy="78" r="7" fill="#7c8aa3"/>
+  <path d="M400 85 L400 110" stroke="#7c8aa3" stroke-width="4"/>
+  <path d="M330 145 L400 110 L470 145" stroke="#7c8aa3" stroke-width="4" fill="none"/>
+
+  <!-- mangas -->
+  <path d="M320 150 L275 178 L290 350 L325 335 Z" fill="#0a0a0d"/>
+  <path d="M480 150 L525 178 L510 350 L475 335 Z" fill="#0a0a0d"/>
+
+  <!-- saco -->
+  <path d="M322 145 L478 145 L500 365 L300 365 Z" fill="#15151a"/>
+
+  <!-- escote -->
+  <path d="M362 145 L438 145 L400 280 Z" fill="#f5f6f8" opacity="0.92"/>
+  <path d="M362 145 L400 280 L401 280 L363 145 Z" fill="#0a0a0d"/>
+  <path d="M438 145 L400 280 L399 280 L437 145 Z" fill="#0a0a0d"/>
+
+  <!-- corbata -->
+  <path d="M388 155 L412 155 L428 300 L400 330 L372 300 Z" fill="#8a1f1f"/>
+
+  <!-- botones -->
+  <circle cx="412" cy="320" r="6" fill="#0a0a0d"/>
+  <circle cx="412" cy="345" r="6" fill="#0a0a0d"/>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img">
+  <rect width="400" height="400" fill="#f0ece4"/>
+  <!-- mangas -->
+  <path d="M160 95 L138 110 L145 230 L165 222 Z" fill="#0e0e10"/>
+  <path d="M240 95 L262 110 L255 230 L235 222 Z" fill="#0e0e10"/>
+  <!-- saco -->
+  <path d="M161 93 L239 93 L250 235 L150 235 Z" fill="#1b1b1d"/>
+  <!-- escote -->
+  <path d="M183 93 L217 93 L200 160 Z" fill="#fbf8f3"/>
+  <path d="M183 93 L200 160 L201 160 L184 93 Z" fill="#0e0e10"/>
+  <path d="M217 93 L200 160 L199 160 L216 93 Z" fill="#0e0e10"/>
+  <path d="M195 100 L205 100 L213 168 L200 184 L187 168 Z" fill="#8a1f1f"/>
+  <circle cx="207" cy="200" r="4" fill="#0e0e10"/>
+  <circle cx="207" cy="218" r="4" fill="#0e0e10"/>
+  <!-- pantalón -->
+  <path d="M158 235 L242 235 L236 360 L210 360 L204 270 L196 270 L190 360 L164 360 Z" fill="#23232a"/>
+</svg>

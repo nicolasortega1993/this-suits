@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img">
+  <rect width="400" height="400" fill="#f0ece4"/>
+
+  <!-- mangas -->
+  <path d="M130 132 L88 155 L98 322 L132 308 Z" fill="#1f2c49"/>
+  <path d="M270 132 L312 155 L302 322 L268 308 Z" fill="#1f2c49"/>
+
+  <!-- cuerpo del saco -->
+  <path d="M132 130 L268 130 L290 338 L110 338 Z" fill="#2b3d63"/>
+
+  <!-- escote en V (camisa) -->
+  <path d="M172 130 L228 130 L200 258 Z" fill="#fbf8f3"/>
+
+  <!-- bordes de solapa -->
+  <path d="M172 130 L200 214 L201 214 L173 130 Z" fill="#1f2c49"/>
+  <path d="M228 130 L200 214 L199 214 L227 130 Z" fill="#1f2c49"/>
+
+  
+
+  <!-- botones -->
+  <circle cx="207" cy="268" r="6" fill="#1f2c49"/>
+  <circle cx="207" cy="298" r="6" fill="#1f2c49"/>
+
+  <path d="M193 138 L207 138 L218 224 L200 246 L182 224 Z" fill="#8a1f1f"/>
+</svg>

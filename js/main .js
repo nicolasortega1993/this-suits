@@ -132,4 +132,101 @@
   channelInputs.forEach((input) => input.addEventListener("change", updateContactSummary));
   reasonInputs.forEach((input) => input.addEventListener("change", updateContactSummary));
   updateContactSummary();
+
+  /* -----------------------------------------------------
+   * 6. Catálogo: filtros en vivo (solo corre si la grilla existe)
+   *    Combina checkboxes (categoría / disponibilidad / color)
+   *    con el buscador de texto. Todo client-side: no hay
+   *    backend en este TP, pero el filtrado es funcional real,
+   *    no decorativo.
+   * --------------------------------------------------- */
+  const grilla = document.getElementById("ts-grilla-productos");
+
+  if (grilla) {
+    const tarjetas = Array.from(grilla.querySelectorAll("[data-categoria]"));
+    const buscador = document.getElementById("ts-buscador");
+    const contador = document.getElementById("ts-contador");
+    const sinResultados = document.getElementById("ts-sin-resultados");
+    const limpiarBtn = document.getElementById("ts-limpiar-filtros");
+
+    const checkedValues = (grupo) =>
+      Array.from(document.querySelectorAll(`input[data-filter="${grupo}"]:checked`)).map((el) => el.value);
+
+    const aplicarFiltros = () => {
+      const categorias = checkedValues("categoria");
+      const disponibilidades = checkedValues("disponibilidad");
+      const colores = checkedValues("color");
+      const texto = (buscador?.value || "").trim().toLowerCase();
+
+      let visibles = 0;
+
+      tarjetas.forEach((tarjeta) => {
+        const cat = tarjeta.dataset.categoria;
+        const disp = tarjeta.dataset.disponibilidad.split(" ");
+        const color = tarjeta.dataset.color;
+        const titulo = tarjeta.textContent.toLowerCase();
+
+        // Selección vacía en un grupo = ese filtro no restringe (se muestran todas)
+        const pasaCategoria = categorias.length === 0 || categorias.includes(cat);
+        const pasaDisponibilidad = disponibilidades.length === 0 || disp.some((d) => disponibilidades.includes(d));
+        const pasaColor = colores.length === 0 || colores.includes(color);
+        const pasaTexto = texto === "" || titulo.includes(texto);
+
+        const visible = pasaCategoria && pasaDisponibilidad && pasaColor && pasaTexto;
+        tarjeta.classList.toggle("d-none", !visible);
+        if (visible) visibles += 1;
+      });
+
+      if (contador) contador.textContent = visibles;
+      if (sinResultados) sinResultados.classList.toggle("d-none", visibles !== 0);
+    };
+
+    document.querySelectorAll('#ts-filtros input[data-filter]').forEach((input) => {
+      input.addEventListener("change", aplicarFiltros);
+    });
+
+    if (buscador) {
+      buscador.addEventListener("input", aplicarFiltros);
+    }
+
+    if (limpiarBtn) {
+      limpiarBtn.addEventListener("click", () => {
+        document.querySelectorAll('#ts-filtros input[data-filter="categoria"]').forEach((el) => (el.checked = true));
+        document.querySelectorAll('#ts-filtros input[data-filter="disponibilidad"]').forEach((el) => (el.checked = true));
+        document.querySelectorAll('#ts-filtros input[data-filter="color"]').forEach((el) => (el.checked = false));
+        if (buscador) buscador.value = "";
+        aplicarFiltros();
+      });
+    }
+
+    aplicarFiltros();
+  }
+
+  /* -----------------------------------------------------
+   * 7. Página de producto: miniaturas sincronizadas con el
+   *    carrusel (captura el evento propio de Bootstrap
+   *    "slid.bs.carousel") + botón "Añadir al carrito".
+   * --------------------------------------------------- */
+  const galeria = document.getElementById("tsGaleriaProducto");
+  const thumbs = document.querySelectorAll("[data-ts-thumb]");
+
+  if (galeria && thumbs.length) {
+    const marcarActiva = (index) => {
+      thumbs.forEach((thumb, i) => thumb.classList.toggle("is-active", i === index));
+    };
+    galeria.addEventListener("slid.bs.carousel", (event) => marcarActiva(event.to));
+    marcarActiva(0);
+  }
+
+  const addCarritoBtn = document.getElementById("ts-add-carrito");
+  const talleSelect = document.getElementById("ts-talle");
+  const talleToastSpan = document.getElementById("ts-talle-toast");
+
+  if (addCarritoBtn) {
+    addCarritoBtn.addEventListener("click", () => {
+      if (talleToastSpan && talleSelect) talleToastSpan.textContent = talleSelect.value;
+      const toastEl = document.getElementById("carritoToast");
+      if (toastEl) bootstrap.Toast.getOrCreateInstance(toastEl).show();
+    });
+  }
 })();

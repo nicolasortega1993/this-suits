@@ -110,6 +110,18 @@ body { padding-top: var(--ts-navbar-height); }
   color: rgba($ts-white, .4);
 }
 
+// Ilustraciones propias de producto (sastrería): llevan su propio fondo
+// crema dibujado en el SVG, solo necesitan un borde fino para encuadrar.
+.ts-product-figure {
+  display: block;
+  border: 1px solid rgba($ts-slate-400, .25);
+}
+
+.ts-thumb {
+  .ts-product-figure { border-width: 1px; transition: border-color .15s ease; }
+  &.is-active .ts-product-figure { border: 2px solid $ts-red-700; }
+}
+
 // ---------------------------------------------------------
 // Tarjetas de producto (sección Catálogo, reutilizadas en Inicio)
 // ---------------------------------------------------------
