@@ -229,4 +229,39 @@
       if (toastEl) bootstrap.Toast.getOrCreateInstance(toastEl).show();
     });
   }
+
+  // =========================================================
+  // LÓGICA DE PRODUCTO: Selector dinámico de precio
+  // =========================================================
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Seleccionamos los inputs (los botones de alquilar/comprar) y los textos del precio
+    const modalidadRadios = document.querySelectorAll('.ts-modalidad-radio');
+    const precioDisplay = document.getElementById('ts-precio-display');
+    const precioLabel = document.getElementById('ts-precio-label');
+
+    // 2. Verificamos que estos elementos existan en la página actual para que no tire error en el index o catálogo
+    if (modalidadRadios.length > 0 && precioDisplay && precioLabel) {
+
+      // 3. Le agregamos un "escuchador" de eventos a cada botón
+      modalidadRadios.forEach(radio => {
+        radio.addEventListener('change', (evento) => {
+
+          // 4. Capturamos el valor (38000 o 120000) y le damos formato de moneda argentina
+          const precio = parseInt(evento.target.value).toLocaleString('es-AR');
+
+          // 5. Actualizamos el número gigante en el HTML
+          precioDisplay.textContent = `$${precio}`;
+
+          // 6. Cambiamos el texto chiquito de arriba según qué botón se tocó
+          if (evento.target.id === 'modAlquiler') {
+            precioLabel.textContent = 'Precio por evento (incluye tintorería)';
+          } else {
+            precioLabel.textContent = 'Precio de compra final';
+          }
+        });
+      });
+    }
+  });
+
 })();
