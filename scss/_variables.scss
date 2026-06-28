@@ -8,22 +8,15 @@
 //   - Blanco                 -> texto principal sobre fondo oscuro
 //   - Azul marino            -> tarjetas / superficies internas
 
-$ts-navy-950: #0d1b2e;   // fondo principal
-$ts-navy-800: #16263c;   // tarjetas / superficies internas
-$ts-navy-700: #1f3350;   // bordes y superficies sobre navy-800
-$ts-red-700:  #8a1f1f;   // rojo oscuro de marca (botones, fondos con texto blanco)
-$ts-red-600:  #a8281f;   // hover del rojo de marca (sobre fondos claros)
-// Mismo matiz que $ts-red-700 pero aclarado: necesario para texto en rojo
-// directamente sobre el fondo navy (un rojo oscuro sobre navy no llega al
-// contraste mínimo WCAG AA). Verificado: 4.8:1 sobre $ts-navy-950.
-$ts-red-accent-on-dark: #e25b48;
-$ts-slate-400:#7c8aa3;   // azul grisáceo claro (texto secundario sobre fondo oscuro)
-// Variante oscurecida del mismo matiz: la utilidad .text-secondary de
-// Bootstrap se usa siempre sobre fondo blanco en este sitio, y
-// $ts-slate-400 no alcanza el contraste mínimo WCAG AA (4.5:1) ahí.
-// Verificado: 7.08:1 sobre blanco.
-$ts-slate-700:#4f5969;
-$ts-white:    #f5f6f8;   // blanco cálido (texto principal)
+$ts-navy-950: #0C1B2E;   // Navy (fondo principal)
+$ts-navy-800: #112236;   // Navy medio (tarjetas / superficies internas)
+$ts-navy-700: #1C334E;   // Bordes y superficies sobre navy medio
+$ts-red-700:  #8B1A1A;   // Crimson (rojo oscuro de marca)
+$ts-red-600:  #A52525;   // Hover Crimson
+$ts-red-accent-on-dark: #E65A5A;
+$ts-slate-400: #8FA8C0;   // Steel (azul grisáceo claro)
+$ts-slate-700: #6D859C;   // Steel oscuro para contraste en fondos claros
+$ts-white:    #FFFFFF;   // White (blanco puro)
 
 // ---- Mapeo a variables de Bootstrap --------------------
 $primary:       $ts-red-700;

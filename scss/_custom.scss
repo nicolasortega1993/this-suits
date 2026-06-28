@@ -1,13 +1,11 @@
 // =========================================================
 // THIS SUITS — Estilos de componentes propios
-// Se apoyan en las variables de _variables.scss y en las
-// utilidades de Bootstrap. Acá solo lo que Bootstrap no
-// resuelve por sí solo: hero, tarjetas oscuras, sidebar de
-// filtros, placeholders de imagen, footer, etc.
+// Diseñados en base al mockup de Figma del TP1.
+// Se apoyan en las variables de _variables.scss y en Bootstrap.
 // =========================================================
 
 // ---------------------------------------------------------
-// Utilidades de superficie oscura reutilizables
+// Utilidades de superficie y marca
 // ---------------------------------------------------------
 .bg-ts-dark      { background-color: $ts-dark-bg; }
 .bg-ts-surface   { background-color: $ts-dark-surface; }
@@ -15,280 +13,862 @@
 .text-ts-muted   { color: $ts-dark-muted; }
 .border-ts       { border-color: $ts-dark-border !important; }
 
+// Compensación de altura de Navbar para el body
+:root { --ts-navbar-height: 78px; }
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+body { 
+  padding-top: var(--ts-navbar-height); 
+  font-family: $font-family-sans;
+  background-color: $ts-white;
+  color: $ts-navy-950;
+}
+
+// ---------------------------------------------------------
+// Títulos y subtítulos de sección
+// ---------------------------------------------------------
+h2.h1, .h1 {
+  font-family: $font-family-serif;
+  font-size: clamp(2.3rem, 5.5vw, 3.5rem) !important; // Agrandado
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+header p.text-secondary, 
+.text-ts-muted, 
+p.text-ts-muted {
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem) !important; // Agrandado
+  font-weight: 500;
+  color: $ts-slate-700 !important;
+}
+
 // ---------------------------------------------------------
 // Header / Navbar
 // ---------------------------------------------------------
-// El navbar usa position fixed-top: compensamos con padding-top
-// en body para que ningún contenido quede tapado debajo, en
-// cualquier breakpoint (la altura real del navbar varía un
-// poco entre mobile/desktop, por eso el valor incluye margen).
-:root { --ts-navbar-height: 72px; }
-body { padding-top: var(--ts-navbar-height); }
-
 .ts-navbar {
-  background-color: $ts-dark-bg;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1030 !important;
+  background-color: $ts-dark-bg !important;
   border-bottom: 1px solid $ts-dark-border;
-  transition: box-shadow .2s ease, padding .2s ease;
+  padding-block: 0.75rem;
+  transition: all 0.3s ease;
 
   .navbar-brand {
     font-family: $font-family-serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: $ts-dark-text;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: $ts-white;
     display: flex;
     align-items: center;
-    gap: .6rem;
+    gap: 0.75rem;
+    letter-spacing: 0.02em;
+
+    img {
+      max-height: 38px;
+      width: auto;
+    }
   }
 
   .nav-link {
-    font-size: .85rem;
-    letter-spacing: .04em;
+    font-family: $font-family-sans;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    font-weight: 600;
-    padding-inline: 1rem !important;
+    font-weight: 700;
+    color: $ts-slate-400 !important;
+    padding-inline: 1.25rem !important;
+    transition: color 0.2s ease;
+
+    &:hover, &.active {
+      color: $ts-white !important;
+    }
   }
 
+  .btn-primary {
+    background-color: $ts-red-700;
+    border-color: $ts-red-700;
+    font-family: $font-family-sans;
+    font-size: 0.8rem; 
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.6rem 1.35rem;
+    text-transform: uppercase;
+    
+    &:hover {
+      background-color: darken($ts-red-700, 8%);
+      border-color: darken($ts-red-700, 8%);
+    }
+  }
   // Estado aplicado por JS (main.js) al hacer scroll
   &.is-scrolled {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    padding-block: 0.5rem;
   }
 }
 
-.ts-logo-mark {
-  width: 34px;
-  height: 34px;
-  background-color: $ts-red-700;
-  color: $ts-white;
+.ts-logo-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+// Icono de perfil de usuario
+.ts-user-profile-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba($ts-white, 0.2);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: $font-family-serif;
-  font-weight: 700;
-  font-size: .95rem;
-  flex-shrink: 0;
+  color: $ts-white;
+  transition: all 0.2s ease;
+  background: transparent;
+
+  &:hover {
+    background-color: rgba($ts-white, 0.1);
+    border-color: $ts-white;
+  }
 }
 
 // ---------------------------------------------------------
 // Hero (portada)
 // ---------------------------------------------------------
 .ts-hero {
-  background-color: $ts-dark-bg;
-  color: $ts-dark-text;
-  padding-block: clamp(3.5rem, 8vw, 7rem);
+  background-image: linear-gradient(rgba($ts-dark-bg, 0.75), rgba($ts-dark-bg, 0.75)), url('../img/Trajes-de-hombre.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: $ts-white;
+  padding-block: clamp(6rem, 12vw, 11rem); // Mayor padding para dar impacto visual a la foto
+  text-align: center;
 
   h1 {
-    font-size: clamp(2.4rem, 6vw, 4rem);
-    line-height: 1.05;
-    letter-spacing: .01em;
+    font-family: $font-family-serif;
+    font-size: clamp(2.8rem, 7vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
   }
 
   .lead {
-    color: $ts-dark-muted;
     font-family: $font-family-sans;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem); 
+    color: $ts-slate-400;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn {
+    font-family: $font-family-sans;
+    font-size: 0.95rem; 
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.9rem 2.5rem;
+    text-transform: uppercase;
   }
 }
 
 // ---------------------------------------------------------
-// Placeholders de imagen (consistentes con los mockups del TP1:
-// bloques grises con ícono, en vez de fotografía real)
+// Controles de carrusel externos y circulares
 // ---------------------------------------------------------
-.ts-placeholder {
-  background-color: rgba($ts-slate-400, .15);
-  border: 1px solid rgba($ts-slate-400, .3);
+.ts-carousel-container {
+  position: relative;
+  padding-inline: 1rem; // Padding de seguridad en móviles para contener los márgenes negativos de las .row
+  overflow: visible;
+
+  @media (min-width: 992px) {
+    padding-inline: 0; // Se remueve en escritorio para permitir que las flechas floten externamente
+  }
+}
+
+.ts-carousel-control {
+  width: 42px;
+  height: 42px;
+  background-color: $ts-white;
+  border: 1px solid rgba($ts-navy-950, 0.15);
+  color: $ts-navy-950;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $ts-slate-400;
-  min-height: 220px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  transition: all 0.2s ease;
+  opacity: 1;
 
-  svg { width: 2.5rem; height: 2.5rem; opacity: .6; }
-}
-
-.ts-placeholder--dark {
-  background-color: rgba($ts-white, .04);
-  border-color: rgba($ts-white, .12);
-  color: rgba($ts-white, .4);
-}
-
-// Ilustraciones propias de producto (sastrería): llevan su propio fondo
-// crema dibujado en el SVG, solo necesitan un borde fino para encuadrar.
-.ts-product-figure {
-  display: block;
-  border: 1px solid rgba($ts-slate-400, .25);
-}
-
-.ts-thumb {
-  .ts-product-figure { border-width: 1px; transition: border-color .15s ease; }
-  &.is-active .ts-product-figure { border: 2px solid $ts-red-700; }
-}
-
-// ---------------------------------------------------------
-// Tarjetas de producto (sección Catálogo, reutilizadas en Inicio)
-// ---------------------------------------------------------
-.ts-card-product {
-  border: 1px solid #e4e4e7;
-
-  .ts-placeholder { min-height: 260px; }
-
-  .card-body { padding: 1rem 1.1rem 1.25rem; }
-
-  .ts-card-title {
-    font-family: $font-family-serif;
-    font-size: 1.05rem;
-    margin-bottom: .25rem;
+  svg {
+    width: 16px;
+    height: 16px;
+    stroke: $ts-navy-950;
+    stroke-width: 2.5;
   }
 
-  .badge {
-    border-radius: 0;
-    font-weight: 600;
-    letter-spacing: .03em;
+  &:hover {
+    background-color: $ts-navy-950;
+    border-color: $ts-navy-950;
+    color: $ts-white;
+    svg { stroke: $ts-white; }
+  }
+
+  // En dispositivos móviles y tablets pequeñas, se mantienen en los bordes interiores para evitar recortes
+  &.prev { left: 0.5rem; }
+  &.next { right: 0.5rem; }
+
+  // En pantallas grandes, flotan completamente en los márgenes de la página
+  @media (min-width: 992px) {
+    &.prev { left: -3.5rem; }
+    &.next { right: -3.5rem; }
+  }
+  
+  @media (min-width: 1200px) {
+    &.prev { left: -4.5rem; }
+    &.next { right: -4.5rem; }
+  }
+}
+
+// Paginación del carrusel
+.ts-carousel-indicators {
+  position: static;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-left: 0;
+  list-style: none;
+
+  button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba($ts-navy-950, 0.25);
+    border: none;
+    padding: 0;
+    transition: all 0.2s ease;
+
+    &.active {
+      background-color: $ts-navy-950;
+      transform: scale(1.2);
+    }
+  }
+}
+
+// ---------------------------------------------------------
+// Tarjetas de producto
+// ---------------------------------------------------------
+.ts-placeholder {
+  background-color: #E2E8F0;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94A3B8;
+  min-height: 280px;
+  position: relative;
+  transition: background-color 0.2s ease;
+
+  svg { 
+    width: 2.5rem; 
+    height: 2.5rem; 
+    opacity: 0.5; 
+  }
+}
+
+.ts-product-card {
+  background: transparent;
+  border: none;
+  text-align: left;
+
+  .ts-image-container {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .ts-badge-new {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: $ts-white;
+    color: $ts-navy-950;
+    font-family: $font-family-sans;
+    font-size: 0.7rem; 
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.4rem 0.8rem;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+
+  .ts-card-actions {
+    display: flex;
+    gap: 4px;
+    margin-top: 0.75rem;
+
+    .btn {
+      flex: 1;
+      font-family: $font-family-sans;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 0.6rem 0.25rem;
+      text-transform: uppercase;
+      border-radius: 0;
+    }
+    
+    .btn-crimson {
+      background-color: $ts-red-700;
+      color: $ts-white;
+      border: 1px solid $ts-red-700;
+      &:hover {
+        background-color: darken($ts-red-700, 5%);
+      }
+    }
+
+    .btn-navy {
+      background-color: $ts-navy-950;
+      color: $ts-white;
+      border: 1px solid $ts-navy-950;
+      &:hover {
+        background-color: lighten($ts-navy-950, 8%);
+      }
+    }
+  }
+
+  .ts-card-details {
+    margin-top: 0.75rem;
+    
+    .ts-card-title {
+      font-family: $font-family-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: $ts-navy-950;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
   }
 }
 
 // ---------------------------------------------------------
 // Pasos del proceso ("Así de simple funciona")
 // ---------------------------------------------------------
-.ts-step-number {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%; // único acento circular: distingue paso/número de producto
-  background-color: $ts-red-700;
-  color: $ts-white;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-family: $font-family-serif;
-  font-weight: 700;
+.ts-step-item {
+  text-align: left;
+  
+  .ts-step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .ts-step-number {
+    width: 2.5rem; 
+    height: 2.5rem; 
+    border-radius: 50%;
+    background-color: $ts-red-700;
+    color: $ts-white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-family-sans;
+    font-weight: 700;
+    font-size: 1rem; 
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-family: $font-family-sans;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: $ts-white;
+  }
+
+  p {
+    font-family: $font-family-sans;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: $ts-slate-400;
+    margin-bottom: 0;
+  }
 }
 
 // ---------------------------------------------------------
-// Banda CTA de alquiler
+// Testimonios
+// ---------------------------------------------------------
+.ts-testimonial-card {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: $ts-white;
+
+  .ts-quote-icon {
+    font-size: 3rem;
+    font-family: Georgia, serif;
+    color: $ts-slate-400;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    opacity: 0.4;
+  }
+
+  p {
+    font-family: $font-family-sans;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: $ts-white;
+    margin-bottom: 1.5rem;
+  }
+
+  .ts-author-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .ts-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba($ts-white, 0.15);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: $ts-white;
+      font-family: $font-family-sans;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    span {
+      font-family: $font-family-sans;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: $ts-white;
+    }
+  }
+}
+
+// ---------------------------------------------------------
+// Sección alquiler (CTA)
 // ---------------------------------------------------------
 .ts-cta-banner {
-  background-color: $ts-dark-bg;
-  color: $ts-dark-text;
+  background-color: $ts-white;
+  color: $ts-navy-950;
 
-  .ts-cta-highlight { color: $ts-red-accent-on-dark; }
+  .ts-cta-category {
+    font-family: $font-family-sans;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: $ts-slate-700;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-family: $font-family-serif;
+    font-size: clamp(2.5rem, 5.5vw, 3.8rem);
+    font-weight: 800 !important; //en negrita
+    color: $ts-navy-950;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .ts-cta-highlight {
+    color: $ts-red-700;
+  }
+
+  p {
+    font-family: $font-family-sans;
+    font-size: 1.2rem;
+    color: $ts-slate-700;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .ts-cta-list {
+    font-family: $font-family-sans;
+    font-size: 1.1rem;
+    color: $ts-navy-950;
+    margin-bottom: 2rem;
+    padding-left: 0;
+
+    li {
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+
+      svg {
+        color: $ts-red-700;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  .btn-primary {
+    background-color: $ts-red-700;
+    border-color: $ts-red-700;
+    font-family: $font-family-sans;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 1.1rem 3.5rem;
+    text-transform: uppercase;
+    border-radius: 0;
+    transition: all 0.25s ease;
+
+    &:hover {
+      background-color: darken($ts-red-700, 6%);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba($ts-red-700, 0.3);
+    }
+  }
+
+  .ts-placeholder {
+    min-height: 380px;
+  }
 }
 
 // ---------------------------------------------------------
-// Franja de confianza (reseñas / social proof)
+// Sección de confianza
 // ---------------------------------------------------------
 .ts-trust-strip {
-  background-color: #eef0f3;
-  font-size: .9rem;
+  background-color: $ts-navy-800;
+  color: $ts-white;
+  font-family: $font-family-sans;
+  border-top: 1px solid $ts-dark-border;
+  border-bottom: 1px solid $ts-dark-border;
+
+  .ts-trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-block: 1.25rem;
+    text-align: center;
+
+    p {
+      margin-bottom: 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: $ts-slate-400;
+    }
+
+    span {
+      font-size: 0.85rem;
+      color: $ts-white;
+      font-weight: 400;
+    }
+  }
+
+  // Grupo de avatares de reseñas de Google
+  .ts-avatar-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ts-trust-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid $ts-navy-800;
+    margin-left: -8px;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:hover {
+      transform: translateY(-3px) scale(1.1);
+      z-index: 10;
+    }
+  }
+
+  .ts-stars-group {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  .ts-star-icon {
+    width: 18px;
+    height: 18px;
+    fill: #FFB300;
+    filter: drop-shadow(0 0 2px rgba(255, 179, 0, 0.4));
+  }
+
+  .ts-trust-brand-icon {
+    height: 34px;
+    width: auto;
+    opacity: 0.95;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  // Divisor diagonal en desktop
+  .ts-divider-diagonal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $ts-slate-700;
+    font-weight: 300;
+    font-size: 1.75rem;
+  }
 }
 
 // ---------------------------------------------------------
 // Footer
 // ---------------------------------------------------------
 .ts-footer {
-  background-color: $ts-dark-bg;
-  color: $ts-dark-muted;
-  border-top: 1px solid $ts-dark-border;
+  background-color: #F8FAFC;
+  color: $ts-slate-700;
+  border-top: 1px solid #E2E8F0;
+  font-family: $font-family-sans;
 
-  a { color: $ts-dark-muted; }
-  a:hover { color: $ts-dark-text; }
+  p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
 
   .ts-footer-heading {
-    color: $ts-dark-text;
-    font-size: .8rem;
-    letter-spacing: .06em;
+    color: $ts-navy-950;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    font-weight: 600;
-  }
-}
-
-// ---------------------------------------------------------
-// Breadcrumb sobre fondo oscuro (.bg-ts-surface)
-// Se sobrescriben las variables CSS del propio componente
-// (forma recomendada en Bootstrap 5.3) en vez de pelear por
-// especificidad contra .breadcrumb-item.active.
-// ---------------------------------------------------------
-.bg-ts-surface .breadcrumb {
-  --bs-breadcrumb-divider-color: #{$ts-dark-muted};
-  --bs-breadcrumb-item-active-color: #{$ts-dark-text};
-}
-
-// ---------------------------------------------------------
-// Página Contacto: sidebar de filtros de canal/horario
-// ---------------------------------------------------------
-.ts-contact-hero {
-  background-color: $ts-dark-surface;
-  color: $ts-dark-text;
-  padding-block: 3rem;
-
-  h1 { font-size: clamp(2rem, 4vw, 2.75rem); }
-}
-
-.ts-filter-group {
-  .ts-filter-heading {
-    font-size: .75rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: $ts-slate-700; // se usa sobre fondo claro: necesita el tono AA-safe
-    margin-bottom: .6rem;
+    font-weight: 800 !important;
+    margin-bottom: 1.25rem;
   }
 
-  .form-check-label { font-size: .92rem; }
-}
-
-.ts-contact-panel {
-  background-color: $ts-dark-surface;
-  border: 1px solid $ts-dark-border;
-  color: $ts-dark-text;
-}
-
-.ts-social-icon {
-  width: 2.25rem;
-  height: 2.25rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid $ts-dark-border;
-  color: $ts-dark-text;
-
-  &:hover { background-color: $ts-dark-border; }
-}
-
-// Form controls sobre fondo oscuro (panel "Enviános un mensaje")
-.ts-form-dark {
-  .form-label {
-    font-size: .75rem;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: $ts-dark-muted;
+  .ts-footer-logo-img {
+    height: 34px;
+    width: auto;
+    object-fit: contain;
   }
 
-  .form-control {
-    background-color: rgba($ts-white, .04);
-    border-color: $ts-dark-border;
-    color: $ts-dark-text;
+  .ts-footer-btn-list {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    list-style: none;
+    border: 1px solid rgba($ts-navy-950, 0.12);
 
-    &::placeholder { color: rgba($ts-white, .35); }
-
-    &:focus {
-      background-color: rgba($ts-white, .06);
-      border-color: $ts-red-700;
-      color: $ts-dark-text;
-      box-shadow: 0 0 0 .2rem rgba($ts-red-700, .25);
+    li {
+      border-bottom: 1px solid rgba($ts-navy-950, 0.12);
+      &:last-child {
+        border-bottom: none;
+      }
     }
 
-    // Estado aplicado por JS al validar en vivo
-    &.is-valid-live { border-color: #4f9d6e; }
-    &.is-invalid-live { border-color: #c0463c; }
+    a {
+      display: block;
+      background-color: $ts-navy-950;
+      color: $ts-white;
+      text-align: center;
+      padding: 0.65rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: lighten($ts-navy-950, 8%);
+      }
+
+      &.active {
+        background-color: $ts-slate-400;
+        color: $ts-white;
+      }
+    }
+  }
+
+  // Enlaces normales de ayuda
+  .ts-footer-links {
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    a {
+      color: $ts-slate-700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $ts-navy-950;
+      }
+    }
+  }
+
+  .ts-social-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #E2E8F0;
+    color: $ts-slate-700;
+    background-color: $ts-white;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: $ts-navy-950;
+      color: $ts-white;
+      border-color: $ts-navy-950;
+    }
+  }
+  
+  .ts-copyright-bar {
+    border-top: 1px solid #E2E8F0;
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: $ts-slate-400;
+
+    a {
+      color: $ts-slate-400;
+      text-decoration: none;
+      &:hover { color: $ts-navy-950; }
+    }
   }
 }
 
 // ---------------------------------------------------------
-// Botón "volver arriba" (controlado por evento de scroll en JS)
+// Menú móvil (Offcanvas premium)
 // ---------------------------------------------------------
+.ts-mobile-menu {
+  background-color: $ts-dark-bg !important;
+  border-left: 1px solid rgba($ts-white, 0.08) !important;
+  width: 320px;
+  max-width: 85vw;
+
+  .offcanvas-header {
+    border-bottom: 1px solid rgba($ts-white, 0.08);
+    padding: 1.5rem;
+
+    .offcanvas-title {
+      font-family: $font-family-serif;
+      font-weight: 700;
+      color: $ts-white;
+      letter-spacing: 0.04em;
+      font-size: 1.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      
+      img {
+        height: 30px;
+        width: auto;
+      }
+    }
+
+    .btn-close-white {
+      opacity: 0.75;
+      transition: all 0.2s ease;
+      &:hover {
+        opacity: 1;
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .offcanvas-body {
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 70px);
+  }
+
+  .ts-mobile-nav-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 2rem;
+
+    li {
+      margin-bottom: 1.5rem;
+    }
+
+    a {
+      font-family: $font-family-sans; // Montserrat, igual a la nav bar de escritorio
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: $ts-slate-400;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      &:hover, &.active {
+        color: $ts-white;
+        transform: translateX(6px);
+      }
+
+      &::before {
+        content: '';
+        width: 0;
+        height: 2px;
+        background-color: $ts-red-700;
+        transition: width 0.25s ease;
+      }
+
+      &:hover::before, &.active::before {
+        width: 10px;
+      }
+    }
+  }
+
+  .btn-primary {
+    background-color: $ts-red-700;
+    border-color: $ts-red-700;
+    font-family: $font-family-sans;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.9rem;
+    text-transform: uppercase;
+    border-radius: 0;
+    
+    &:hover {
+      background-color: darken($ts-red-700, 6%);
+    }
+  }
+}
+
+// Botón "volver arriba"
 .ts-back-to-top {
   position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  width: 2.75rem;
-  height: 2.75rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
   display: none;
   align-items: center;
   justify-content: center;
@@ -297,12 +877,15 @@ body { padding-top: var(--ts-navbar-height); }
   border: none;
   z-index: 1040;
   opacity: 0;
-  transition: opacity .25s ease;
+  transition: opacity 0.25s ease;
 
   &.is-visible { display: inline-flex; opacity: 1; }
+  &:hover {
+    background-color: darken($ts-red-700, 8%);
+  }
 }
 
 // Respeta preferencia de movimiento reducido
 @media (prefers-reduced-motion: reduce) {
-  * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
