@@ -1,0 +1,184 @@
+// Estilos exclusivos del Detalle de Producto
+
+.ts-product-title-serif {
+  font-family: $font-family-serif;
+  font-weight: 700;
+  color: $ts-navy-950;
+}
+
+.ts-product-figure {
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 2rem;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.ts-thumb {
+  opacity: 0.6;
+  transition: all 0.2s ease;
+  
+  img {
+    padding: 0.25rem;
+    border-radius: 6px;
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+  }
+  
+  &:hover, &.is-active {
+    opacity: 1;
+    img {
+      border-color: $ts-navy-950;
+      box-shadow: 0 0 0 2px rgba($ts-navy-950, 0.15);
+    }
+  }
+}
+
+// Botones de modalidad 
+.btn-outline-navy {
+  border-color: $ts-navy-950;
+  color: $ts-navy-950;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: $ts-navy-950;
+    color: $ts-white;
+    border-color: $ts-navy-950;
+  }
+}
+
+.btn-check:checked + .btn-outline-navy {
+  background-color: $ts-navy-950;
+  color: $ts-white;
+  border-color: $ts-navy-950;
+}
+
+.btn-outline-crimson {
+  border-color: $ts-red-700;
+  color: $ts-red-700;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: $ts-red-600;
+    color: $ts-white;
+    border-color: $ts-red-600;
+  }
+}
+
+.btn-check:checked + .btn-outline-crimson {
+  background-color: $ts-red-700;
+  color: $ts-white;
+  border-color: $ts-red-700;
+}
+
+.ts-clean-accordion {
+  .accordion-item {
+    border: none !important;
+    background-color: transparent !important;
+    border-bottom: 1px solid #E2E8F0 !important;
+    
+    &:last-child {
+      border-bottom: none !important;
+    }
+  }
+  
+  .accordion-button {
+    border: none !important;
+    background-color: transparent !important;
+    padding-inline: 0 !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    color: $ts-navy-950 !important;
+    
+    &::after {
+      filter: brightness(0.1);
+    }
+    
+    &:not(.collapsed) {
+      background-color: transparent !important;
+      color: $ts-navy-950 !important;
+      box-shadow: none !important;
+    }
+    
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+}
+
+// Carruseles de relacionados responsivos 
+.ts-carousel-mobile,
+.ts-carousel-tablet,
+.ts-carousel-desktop {
+  margin: 0 auto;
+  position: relative;
+  padding-inline: 3.5rem;
+  
+  .card {
+    max-width: 250px;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 2.2rem;
+    height: 2.2rem;
+    top: 40%; // Centrado relativo a la imagen 
+    transform: translateY(-50%);
+    background-color: $ts-navy-950;
+    border-radius: 50%;
+    opacity: 0.85;
+    transition: all 0.2s ease;
+    
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      width: 1rem;
+      height: 1rem;
+    }
+    
+    &:hover {
+      opacity: 1;
+      background-color: $ts-red-700;
+    }
+  }
+  
+  .carousel-control-prev {
+    left: 0.5rem;
+  }
+  
+  .carousel-control-next {
+    right: 0.5rem;
+  }
+}
+
+.ts-carousel-mobile {
+  max-width: 360px;
+  display: block;
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.ts-carousel-tablet {
+  max-width: 640px;
+  display: none;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    display: block;
+  }
+}
+
+.ts-carousel-desktop {
+  max-width: 1200px;
+  display: none;
+  @media (min-width: 1024.02px) {
+    display: block;
+  }
+  
+  .card {
+    max-width: 200px;
+  }
+}

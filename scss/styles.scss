@@ -48,4 +48,7 @@
 @import "../node_modules/bootstrap/scss/helpers/visually-hidden";
 
 // 5) Estilos propios del sitio
-@import "custom";
+@import "comunes";
+@import "inicio";
+@import "catalogo";
+@import "producto";

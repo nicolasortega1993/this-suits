@@ -1,0 +1,373 @@
+// Estilos exclusivos del Catálogo
+
+.ts-catalog-hero {
+  background-image: linear-gradient(rgba($ts-navy-950, 0.85), rgba($ts-navy-950, 0.85)), url('../img/eleccion-traje-catalogo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid $ts-navy-700;
+  padding-block: 4.5rem;
+  text-align: center;
+
+  @media (max-width: 1024px) {
+    padding-block: 3.2rem;
+  }
+
+  @media (max-width: 768px) {
+    padding-block: 2.5rem;
+  }
+
+  @media (max-width: 576px) {
+    padding-block: 2rem;
+  }
+  
+  h1 {
+    font-family: $font-family-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    color: $ts-white;
+    margin-bottom: 0.5rem;
+    text-transform: none;
+  }
+  
+  p {
+    font-family: $font-family-sans;
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    color: $ts-slate-400;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+}
+
+.ts-search-wrapper {
+  position: relative;
+  background-color: #B2C4D6;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  
+  .ts-search-icon {
+    color: $ts-navy-950;
+    margin-inline: 8px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .form-control {
+    border: none;
+    border-radius: 20px;
+    background-color: $ts-white;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+    color: $ts-navy-950;
+    font-family: $font-family-sans;
+    font-weight: 600;
+    width: 100%;
+    
+    &::placeholder {
+      color: $ts-slate-700;
+      opacity: 0.6;
+    }
+    
+    &:focus {
+      box-shadow: none;
+      outline: none;
+      background-color: $ts-white;
+    }
+  }
+}
+
+.ts-filter-section-title {
+  font-family: $font-family-sans;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: $ts-navy-950;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.ts-filter-group {
+  margin-bottom: 1.5rem;
+  
+  .form-check {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+    
+    .form-check-input {
+      border-radius: 2px;
+      border: 1.5px solid $ts-slate-700;
+      width: 1rem;
+      height: 1rem;
+      margin-top: 0;
+      margin-left: 0;
+      float: none;
+      cursor: pointer;
+      background-color: $ts-white;
+      
+      &:checked {
+        background-color: $ts-navy-950;
+        border-color: $ts-navy-950;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+      }
+      
+      &:focus {
+        box-shadow: none;
+        border-color: $ts-navy-950;
+      }
+    }
+    
+    .form-check-label {
+      font-family: $font-family-sans;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: $ts-navy-950;
+      margin-left: 0.5rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.ts-price-slider-container {
+  margin-bottom: 1.5rem;
+  
+  .form-range {
+    height: 6px;
+    background-color: #E2E8F0;
+    border-radius: 3px;
+    outline: none;
+    padding: 0;
+    
+    &::-webkit-slider-thumb {
+      background-color: $ts-slate-700;
+      border: 2px solid $ts-white;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: background-color 0.1s ease;
+      
+      &:active {
+        background-color: $ts-navy-950;
+      }
+    }
+  }
+  
+  .ts-price-range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: $font-family-sans;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: $ts-navy-950;
+    margin-top: 0.5rem;
+  }
+}
+
+.ts-collapse-filter-item {
+  border-bottom: 1px solid #E2E8F0;
+  
+  &:first-of-type {
+    border-top: 1px solid #E2E8F0;
+  }
+  
+  .ts-collapse-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    font-family: $font-family-sans;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $ts-navy-950;
+    text-transform: uppercase;
+    text-align: left;
+    
+    &::after {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-right: 2px solid $ts-navy-950;
+      border-bottom: 2px solid $ts-navy-950;
+      transform: rotate(45deg);
+      transition: transform 0.2s ease;
+      margin-right: 4px;
+    }
+    
+    &:not(.collapsed)::after {
+      transform: rotate(-135deg);
+    }
+  }
+  
+  .ts-collapse-content {
+    padding-bottom: 0.75rem;
+  }
+}
+
+.ts-sort-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: $font-family-sans;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: $ts-navy-950;
+  
+  .form-select {
+    background-color: #B2C4D6;
+    border: none;
+    font-family: $font-family-sans;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $ts-navy-950;
+    padding: 0.375rem 2rem 0.375rem 1rem;
+    border-radius: 6px;
+    width: auto;
+    cursor: pointer;
+    background-position: right 0.75rem center;
+    
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+// Tarjetas de la grilla de catálogo
+.ts-card-title-serif {
+  font-family: $font-family-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $ts-navy-950;
+  margin-bottom: 0.25rem;
+}
+
+.ts-card-subtitle-sans {
+  font-family: $font-family-sans;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $ts-slate-700;
+  margin-bottom: 0.5rem;
+}
+
+.ts-card-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+  
+  .ts-price-main {
+    font-family: $font-family-sans;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: $ts-navy-950;
+  }
+  
+  .ts-price-alt {
+    font-family: $font-family-sans;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: $ts-slate-400;
+    text-transform: uppercase;
+  }
+}
+
+.ts-card-btn {
+  font-family: $font-family-sans;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  
+  &.btn-crimson {
+    background-color: $ts-red-700;
+    color: $ts-white;
+    &:hover {
+      background-color: darken($ts-red-700, 5%);
+      color: $ts-white;
+    }
+  }
+  
+  &.btn-navy {
+    background-color: $ts-navy-950;
+    color: $ts-white;
+    &:hover {
+      background-color: lighten($ts-navy-950, 8%);
+      color: $ts-white;
+    }
+  }
+}
+
+.ts-pagination-custom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 3rem;
+  
+  .page-item {
+    .page-link {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid $ts-slate-400;
+      color: $ts-slate-700;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: $font-family-sans;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 0;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background-color: rgba($ts-slate-400, 0.1);
+        color: $ts-navy-950;
+      }
+    }
+    
+    &.active {
+      .page-link {
+        background-color: $ts-slate-400;
+        border-color: $ts-slate-400;
+        color: $ts-white;
+      }
+    }
+    
+    &.disabled {
+      .page-link {
+        border-color: transparent;
+        color: $ts-slate-400;
+        cursor: default;
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
+
+#ts-filtros {
+  @media (max-width: 991.98px) {
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+  }
+}
