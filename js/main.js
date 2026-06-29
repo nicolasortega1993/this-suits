@@ -338,7 +338,23 @@
   const talleToastSpan = document.getElementById("ts-talle-toast");
 
   if (addCarritoBtn) {
+    const modAlquiler = document.getElementById("modAlquiler");
+    
+    // Al cargar la página, si "Alquilar" está seleccionado por defecto, adaptamos el texto del botón
+    if (modAlquiler && modAlquiler.checked) {
+      addCarritoBtn.textContent = "Solicitar Alquiler";
+    }
+
     addCarritoBtn.addEventListener("click", () => {
+      if (modAlquiler && modAlquiler.checked) {
+        // Redirigir al formulario de alquiler con el producto y talle seleccionados
+        const talle = talleSelect ? talleSelect.value : "";
+        const producto = document.querySelector(".ts-product-title-serif")?.textContent.trim() || "Traje Royal Windsor";
+        window.location.href = `alquiler.html?producto=${encodeURIComponent(producto)}&talle=${encodeURIComponent(talle)}`;
+        return;
+      }
+
+      // Si es compra, agregar al carrito (flujo estándar)
       if (talleToastSpan && talleSelect) talleToastSpan.textContent = talleSelect.value;
       const toastEl = document.getElementById("carritoToast");
       if (toastEl) bootstrap.Toast.getOrCreateInstance(toastEl).show();
@@ -346,37 +362,150 @@
   }
 
   // =========================================================
-  // Selector dinámico de precios para productos
+  // Selector dinámico de precios y botones para productos
   // =========================================================
 
   document.addEventListener('DOMContentLoaded', () => {
-    // 1. Seleccionamos los inputs (los botones de alquilar/comprar) y los textos del precio
     const modalidadRadios = document.querySelectorAll('.ts-modalidad-radio');
     const precioDisplay = document.getElementById('ts-precio-display');
     const precioLabel = document.getElementById('ts-precio-label');
+    const addCarritoBtn = document.getElementById("ts-add-carrito");
 
-    // 2. Verificamos que estos elementos existan en la página actual para que no tire error en el index o catálogo
     if (modalidadRadios.length > 0 && precioDisplay && precioLabel) {
-
-      // 3. Le agregamos un "escuchador" de eventos a cada botón
       modalidadRadios.forEach(radio => {
         radio.addEventListener('change', (evento) => {
-
-          // 4. Capturamos el valor (38000 o 120000) y le damos formato de moneda argentina
           const precio = parseInt(evento.target.value).toLocaleString('es-AR');
-
-          // 5. Actualizamos el número gigante en el HTML
           precioDisplay.textContent = `$${precio}`;
 
-          // 6. Cambiamos el texto chiquito de arriba según qué botón se tocó
           if (evento.target.id === 'modAlquiler') {
             precioLabel.textContent = 'Precio por evento (incluye tintorería)';
+            if (addCarritoBtn) addCarritoBtn.textContent = "Solicitar Alquiler";
           } else {
             precioLabel.textContent = 'Precio de compra final';
+            if (addCarritoBtn) addCarritoBtn.textContent = "Añadir al carrito";
           }
         });
       });
     }
   });
+
+  /* -----------------------------------------------------
+   * 8. Página de Alquiler: prellenado desde URL,
+   *    actualización interactiva de vista previa y
+   *    validación / envío simulado del formulario.
+   * --------------------------------------------------- */
+  const rentalForm = document.getElementById("rentalForm");
+  if (rentalForm) {
+    const productSelect = document.getElementById("ts-rental-product");
+    const talleSelectRental = document.getElementById("ts-rental-talle");
+    
+    // Elementos de la vista previa interactiva
+    const previewImage = document.getElementById("ts-preview-image");
+    const previewTitle = document.getElementById("ts-preview-title");
+    const previewDesc = document.getElementById("ts-preview-desc");
+    const previewPrice = document.getElementById("ts-preview-price");
+
+    // Función para actualizar la vista previa de la prenda elegida
+    const updatePreview = () => {
+      if (!productSelect) return;
+      const selectedOption = productSelect.options[productSelect.selectedIndex];
+      if (!selectedOption) return;
+
+      const productName = selectedOption.value;
+      const productPrice = selectedOption.getAttribute("data-price");
+      const productImage = selectedOption.getAttribute("data-image");
+      const productDesc = selectedOption.getAttribute("data-desc");
+
+      // Actualizar DOM de vista previa con animación de fade
+      if (previewImage) {
+        previewImage.style.opacity = "0";
+        setTimeout(() => {
+          previewImage.src = productImage || "img/placeholder-square.svg";
+          previewImage.style.opacity = "1";
+        }, 150);
+      }
+
+      if (previewTitle) previewTitle.textContent = productName;
+      if (previewDesc) previewDesc.textContent = productDesc || "";
+      if (previewPrice && productPrice) {
+        previewPrice.textContent = `$${parseInt(productPrice).toLocaleString("es-AR")}`;
+      }
+    };
+
+    // Prellenar desde query params de la URL (?producto=xxx&talle=yyy)
+    const params = new URLSearchParams(window.location.search);
+    const paramProducto = params.get("producto");
+    const paramTalle = params.get("talle");
+
+    if (paramProducto && productSelect) {
+      for (let i = 0; i < productSelect.options.length; i++) {
+        if (productSelect.options[i].value.toLowerCase() === paramProducto.toLowerCase()) {
+          productSelect.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    if (paramTalle && talleSelectRental) {
+      for (let i = 0; i < talleSelectRental.options.length; i++) {
+        if (talleSelectRental.options[i].value === paramTalle) {
+          talleSelectRental.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    // Inicializar vista previa al cargar
+    updatePreview();
+
+    // Escuchar cambios en el selector para actualizar la vista previa
+    productSelect.addEventListener("change", updatePreview);
+
+    // Validación en vivo de campos obligatorios
+    const fields = rentalForm.querySelectorAll("input[required], select[required], textarea[required]");
+
+    const validateField = (field) => {
+      const valid = field.checkValidity();
+      field.classList.toggle("is-valid", valid && field.value.trim() !== "");
+      field.classList.toggle("is-invalid", !valid);
+      return valid;
+    };
+
+    // Envío del formulario con simulación de éxito
+    rentalForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const allValid = Array.from(fields).every((field) => validateField(field));
+
+      if (!allValid) {
+        rentalForm.classList.add("was-validated");
+        const firstInvalid = rentalForm.querySelector(".is-invalid");
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      // Mostrar Toast de éxito de Bootstrap
+      const toastEl = document.getElementById("rentalToast");
+      if (toastEl) {
+        const toast = bootstrap.Toast.getOrCreateInstance(toastEl);
+        toast.show();
+      }
+
+      // Resetear formulario
+      rentalForm.reset();
+      fields.forEach((field) => field.classList.remove("is-valid", "is-invalid"));
+      rentalForm.classList.remove("was-validated");
+
+      // Forzar actualización de vista previa al estado por defecto tras el reset
+      setTimeout(updatePreview, 50);
+    });
+
+    // Evento reset
+    rentalForm.addEventListener("reset", () => {
+      fields.forEach((field) => field.classList.remove("is-valid", "is-invalid"));
+      rentalForm.classList.remove("was-validated");
+      setTimeout(updatePreview, 50);
+    });
+  }
 
 })();

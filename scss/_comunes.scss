@@ -549,6 +549,82 @@ p.text-ts-muted {
       padding-top: 1rem;
     }
   }
+
+  // Variante footer claro (Solo para la página de inicio)
+  &.ts-footer-light {
+    background-color: $ts-white;
+    color: $ts-slate-700;
+    border-top: 1px solid rgba($ts-navy-950, 0.1);
+
+    p {
+      color: $ts-slate-700;
+    }
+
+    .ts-footer-brand-title {
+      color: $ts-navy-950;
+    }
+
+    .ts-footer-social-title {
+      color: $ts-navy-950;
+    }
+
+    .ts-footer-heading {
+      color: $ts-navy-950;
+    }
+
+    .ts-footer-btn-list {
+      border: 1px solid rgba($ts-navy-950, 0.1);
+
+      li {
+        border-bottom: 1px solid rgba($ts-navy-950, 0.1);
+      }
+
+      a {
+        background-color: $ts-white;
+        color: $ts-navy-950;
+
+        &:hover {
+          background-color: rgba($ts-navy-950, 0.05);
+        }
+
+        &.active {
+          background-color: $ts-navy-950;
+          color: $ts-white;
+        }
+      }
+    }
+
+    .ts-footer-links {
+      a {
+        color: $ts-slate-700;
+
+        &:hover {
+          color: $ts-navy-950;
+        }
+      }
+    }
+
+    .ts-social-icon {
+      border: 1px solid rgba($ts-navy-950, 0.1);
+      color: $ts-slate-700;
+
+      &:hover {
+        background-color: $ts-navy-950;
+        color: $ts-white;
+        border-color: $ts-navy-950;
+      }
+    }
+
+    .ts-copyright-bar {
+      border-top: 1px solid rgba($ts-navy-950, 0.1);
+      color: $ts-slate-700;
+
+      a {
+        color: $ts-slate-700;
+        &:hover { color: $ts-navy-950; }
+      }
+    }
+  }
 }
 
 // Menú móvil (offcanvas)
