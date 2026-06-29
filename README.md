@@ -9,6 +9,7 @@ Alquiler y venta de trajes y esmóquines. Trabajo práctico de la materia Desarr
 
 - `index.html` — portada
 - `catalogo.html` — listado de productos con filtros funcionales (categoría, disponibilidad, color, búsqueda)
+- `alquiler.html` — formulario de pedido formal de alquiler de un producto en particular
 - `producto.html` — ficha de producto con galería de imágenes
 - `contacto.html` — formulario y datos de contacto
 
@@ -28,6 +29,7 @@ Después, abrir `index.html` directamente en el navegador (no requiere servidor,
 ## Imágenes
 
 Las imágenes de producto en `img/productos/` son ilustraciones vectoriales (SVG) propias, no fotografías de stock, para evitar cualquier problema de derechos de autor al publicar el sitio.
+Las imagenes utilizadas como fondo de banners fueron obtenidas en la página 'unsplash.com' y son de uso comercial libre.
 
 ## Informes
 
