@@ -1,19 +1,13 @@
-// =========================================================
-// THIS SUITS — Estilos de componentes propios
-// Diseñados en base al mockup de Figma del TP1.
-// Se apoyan en las variables de _variables.scss y en Bootstrap.
-// =========================================================
+// Estilos globales
 
-// ---------------------------------------------------------
-// Utilidades de superficie y marca
-// ---------------------------------------------------------
+// Estilos del sitio web
 .bg-ts-dark      { background-color: $ts-dark-bg; }
 .bg-ts-surface   { background-color: $ts-dark-surface; }
 .text-ts-light   { color: $ts-dark-text; }
 .text-ts-muted   { color: $ts-dark-muted; }
 .border-ts       { border-color: $ts-dark-border !important; }
 
-// Compensación de altura de Navbar para el body
+// Compensación de altura de la navbar para el body
 :root { --ts-navbar-height: 78px; }
 html, body {
   overflow-x: hidden;
@@ -26,9 +20,7 @@ body {
   color: $ts-navy-950;
 }
 
-// ---------------------------------------------------------
 // Títulos y subtítulos de sección
-// ---------------------------------------------------------
 h2.h1, .h1 {
   font-family: $font-family-serif;
   font-size: clamp(2.3rem, 5.5vw, 3.5rem) !important; // Agrandado
@@ -44,9 +36,7 @@ p.text-ts-muted {
   color: $ts-slate-700 !important;
 }
 
-// ---------------------------------------------------------
 // Header / Navbar
-// ---------------------------------------------------------
 .ts-navbar {
   position: fixed !important;
   top: 0 !important;
@@ -137,57 +127,14 @@ p.text-ts-muted {
   }
 }
 
-// ---------------------------------------------------------
-// Hero (portada)
-// ---------------------------------------------------------
-.ts-hero {
-  background-image: linear-gradient(rgba($ts-dark-bg, 0.75), rgba($ts-dark-bg, 0.75)), url('../img/Trajes-de-hombre.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: $ts-white;
-  padding-block: clamp(6rem, 12vw, 11rem); // Mayor padding para dar impacto visual a la foto
-  text-align: center;
-
-  h1 {
-    font-family: $font-family-serif;
-    font-size: clamp(2.8rem, 7vw, 4.5rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: 0.02em;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-  }
-
-  .lead {
-    font-family: $font-family-sans;
-    font-size: clamp(1.1rem, 2.5vw, 1.4rem); 
-    color: $ts-slate-400;
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    margin-bottom: 2.5rem;
-  }
-
-  .btn {
-    font-family: $font-family-sans;
-    font-size: 0.95rem; 
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    padding: 0.9rem 2.5rem;
-    text-transform: uppercase;
-  }
-}
-
-// ---------------------------------------------------------
 // Controles de carrusel externos y circulares
-// ---------------------------------------------------------
 .ts-carousel-container {
   position: relative;
-  padding-inline: 1rem; // Padding de seguridad en móviles para contener los márgenes negativos de las .row
+  padding-inline: 1rem; // Padding de seguridad en móviles
   overflow: visible;
 
   @media (min-width: 992px) {
-    padding-inline: 0; // Se remueve en escritorio para permitir que las flechas floten externamente
+    padding-inline: 0;
   }
 }
 
@@ -222,7 +169,7 @@ p.text-ts-muted {
     svg { stroke: $ts-white; }
   }
 
-  // En dispositivos móviles y tablets pequeñas, se mantienen en los bordes interiores para evitar recortes
+  // En dispositivos móviles y tablets, se mantienen en los bordes interiores para evitar recortes
   &.prev { left: 0.5rem; }
   &.next { right: 0.5rem; }
 
@@ -239,23 +186,30 @@ p.text-ts-muted {
 }
 
 // Paginación del carrusel
-.ts-carousel-indicators {
+.carousel-indicators.ts-carousel-indicators {
   position: static;
   margin-top: 1.5rem;
   margin-bottom: 0;
+  margin-inline: 0;
   display: flex;
   justify-content: center;
   gap: 0.5rem;
   padding-left: 0;
   list-style: none;
+  opacity: 1;
 
   button {
+    box-sizing: border-box;
+    flex: 0 0 auto;
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background-color: rgba($ts-navy-950, 0.25);
     border: none;
     padding: 0;
+    margin: 0;
+    text-indent: 0;
+    opacity: 1;
     transition: all 0.2s ease;
 
     &.active {
@@ -265,9 +219,7 @@ p.text-ts-muted {
   }
 }
 
-// ---------------------------------------------------------
 // Tarjetas de producto
-// ---------------------------------------------------------
 .ts-placeholder {
   background-color: #E2E8F0;
   border: none;
@@ -310,6 +262,7 @@ p.text-ts-muted {
     padding: 0.4rem 0.8rem;
     text-transform: uppercase;
     z-index: 2;
+    border: 1px solid #E2E8F0;
   }
 
   .ts-card-actions {
@@ -363,296 +316,119 @@ p.text-ts-muted {
   }
 }
 
-// ---------------------------------------------------------
-// Pasos del proceso ("Así de simple funciona")
-// ---------------------------------------------------------
-.ts-step-item {
-  text-align: left;
+// Contenedor de imagen usado en index y catalogo
+.ts-image-container {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background-color: #F1F5F9;
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba($ts-navy-950, 0.05);
   
-  .ts-step-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .ts-step-number {
-    width: 2.5rem; 
-    height: 2.5rem; 
-    border-radius: 50%;
-    background-color: $ts-red-700;
-    color: $ts-white;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-family: $font-family-sans;
-    font-weight: 700;
-    font-size: 1rem; 
+  img {
+    max-height: 85%;
+    max-width: 85%;
     flex-shrink: 0;
+    object-fit: contain;
+    transition: transform 0.3s ease;
   }
-
-  h3 {
+  
+  &:hover img {
+    transform: scale(1.05);
+  }
+  
+  .ts-badge-group {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+    width: max-content;
+  }
+  
+  .ts-card-badge {
     font-family: $font-family-sans;
-    font-size: 1.1rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    margin-bottom: 0;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.75rem;
+    text-transform: uppercase;
     color: $ts-white;
-  }
-
-  p {
-    font-family: $font-family-sans;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: $ts-slate-400;
-    margin-bottom: 0;
+    
+    &.badge-venta {
+      background-color: $ts-red-700;
+    }
+    
+    &.badge-alquiler {
+      background-color: $ts-navy-950;
+    }
   }
 }
 
-// ---------------------------------------------------------
-// Testimonios
-// ---------------------------------------------------------
-.ts-testimonial-card {
-  background: transparent;
-  border: none;
-  padding: 0;
-  color: $ts-white;
-
-  .ts-quote-icon {
-    font-size: 3rem;
-    font-family: Georgia, serif;
-    color: $ts-slate-400;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-    opacity: 0.4;
-  }
-
-  p {
-    font-family: $font-family-sans;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: $ts-white;
-    margin-bottom: 1.5rem;
-  }
-
-  .ts-author-info {
+// Breadcrumbs comunes
+.ts-breadcrumb {
+  font-family: $font-family-sans;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  
+  .breadcrumb-item {
+    color: $ts-slate-700;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-
-    .ts-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background-color: rgba($ts-white, 0.15);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: $ts-white;
-      font-family: $font-family-sans;
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
-
-    span {
-      font-family: $font-family-sans;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: $ts-white;
-    }
-  }
-}
-
-// ---------------------------------------------------------
-// Sección alquiler (CTA)
-// ---------------------------------------------------------
-.ts-cta-banner {
-  background-color: $ts-white;
-  color: $ts-navy-950;
-
-  .ts-cta-category {
-    font-family: $font-family-sans;
-    font-size: 1.05rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: $ts-slate-700;
-    text-transform: uppercase;
-  }
-
-  h2 {
-    font-family: $font-family-serif;
-    font-size: clamp(2.5rem, 5.5vw, 3.8rem);
-    font-weight: 800 !important; //en negrita
-    color: $ts-navy-950;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-  }
-
-  .ts-cta-highlight {
-    color: $ts-red-700;
-  }
-
-  p {
-    font-family: $font-family-sans;
-    font-size: 1.2rem;
-    color: $ts-slate-700;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-
-  .ts-cta-list {
-    font-family: $font-family-sans;
-    font-size: 1.1rem;
-    color: $ts-navy-950;
-    margin-bottom: 2rem;
-    padding-left: 0;
-
-    li {
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-
-      svg {
-        color: $ts-red-700;
-        flex-shrink: 0;
+    
+    a {
+      color: $ts-slate-700;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      &:hover {
+        color: $ts-navy-950;
       }
     }
-  }
-
-  .btn-primary {
-    background-color: $ts-red-700;
-    border-color: $ts-red-700;
-    font-family: $font-family-sans;
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    padding: 1.1rem 3.5rem;
-    text-transform: uppercase;
-    border-radius: 0;
-    transition: all 0.25s ease;
-
-    &:hover {
-      background-color: darken($ts-red-700, 6%);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba($ts-red-700, 0.3);
-    }
-  }
-
-  .ts-placeholder {
-    min-height: 380px;
-  }
-}
-
-// ---------------------------------------------------------
-// Sección de confianza
-// ---------------------------------------------------------
-.ts-trust-strip {
-  background-color: $ts-navy-800;
-  color: $ts-white;
-  font-family: $font-family-sans;
-  border-top: 1px solid $ts-dark-border;
-  border-bottom: 1px solid $ts-dark-border;
-
-  .ts-trust-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-block: 1.25rem;
-    text-align: center;
-
-    p {
-      margin-bottom: 0;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+    
+    & + .breadcrumb-item::before {
+      content: "/";
       color: $ts-slate-400;
+      padding-inline: 0.75rem;
     }
-
-    span {
-      font-size: 0.85rem;
-      color: $ts-white;
-      font-weight: 400;
+    
+    &.active {
+      color: $ts-navy-950;
     }
-  }
-
-  // Grupo de avatares de reseñas de Google
-  .ts-avatar-group {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .ts-trust-avatar {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid $ts-navy-800;
-    margin-left: -8px;
-    object-fit: cover;
-    transition: transform 0.2s ease;
-
-    &:first-child {
-      margin-left: 0;
-    }
-
-    &:hover {
-      transform: translateY(-3px) scale(1.1);
-      z-index: 10;
-    }
-  }
-
-  .ts-stars-group {
-    display: flex;
-    justify-content: center;
-    gap: 2px;
-  }
-
-  .ts-star-icon {
-    width: 18px;
-    height: 18px;
-    fill: #FFB300;
-    filter: drop-shadow(0 0 2px rgba(255, 179, 0, 0.4));
-  }
-
-  .ts-trust-brand-icon {
-    height: 34px;
-    width: auto;
-    opacity: 0.95;
-    transition: opacity 0.2s ease;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  // Divisor diagonal en desktop
-  .ts-divider-diagonal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: $ts-slate-700;
-    font-weight: 300;
-    font-size: 1.75rem;
   }
 }
 
-// ---------------------------------------------------------
 // Footer
-// ---------------------------------------------------------
 .ts-footer {
-  background-color: #F8FAFC;
-  color: $ts-slate-700;
-  border-top: 1px solid #E2E8F0;
+  background-color: $ts-navy-950;
+  color: $ts-slate-400;
+  border-top: 1px solid $ts-navy-700;
   font-family: $font-family-sans;
 
   p {
     font-size: 0.9rem;
     line-height: 1.6;
+    color: $ts-slate-400;
+  }
+
+  .ts-footer-brand-title {
+    font-family: $font-family-serif;
+    color: $ts-white;
+  }
+
+  .ts-footer-social-title {
+    color: $ts-white;
+    font-size: 0.8rem;
   }
 
   .ts-footer-heading {
-    color: $ts-navy-950;
+    color: $ts-white;
     font-size: 1.05rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -671,10 +447,10 @@ p.text-ts-muted {
     flex-direction: column;
     padding-left: 0;
     list-style: none;
-    border: 1px solid rgba($ts-navy-950, 0.12);
+    border: 1px solid rgba($ts-white, 0.12);
 
     li {
-      border-bottom: 1px solid rgba($ts-navy-950, 0.12);
+      border-bottom: 1px solid rgba($ts-white, 0.12);
       &:last-child {
         border-bottom: none;
       }
@@ -713,13 +489,13 @@ p.text-ts-muted {
     gap: 0.5rem;
 
     a {
-      color: $ts-slate-700;
+      color: $ts-slate-400;
       font-size: 0.85rem;
       text-decoration: none;
       transition: color 0.2s ease;
 
       &:hover {
-        color: $ts-navy-950;
+        color: $ts-white;
       }
     }
   }
@@ -730,20 +506,20 @@ p.text-ts-muted {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #E2E8F0;
-    color: $ts-slate-700;
-    background-color: $ts-white;
+    border: 1px solid rgba($ts-white, 0.12);
+    color: $ts-slate-400;
+    background-color: transparent;
     transition: all 0.2s ease;
 
     &:hover {
-      background-color: $ts-navy-950;
-      color: $ts-white;
-      border-color: $ts-navy-950;
+      background-color: $ts-white;
+      color: $ts-navy-950;
+      border-color: $ts-white;
     }
   }
   
   .ts-copyright-bar {
-    border-top: 1px solid #E2E8F0;
+    border-top: 1px solid rgba($ts-white, 0.12);
     padding-top: 1.5rem;
     margin-top: 2rem;
     font-size: 0.85rem;
@@ -752,14 +528,30 @@ p.text-ts-muted {
     a {
       color: $ts-slate-400;
       text-decoration: none;
-      &:hover { color: $ts-navy-950; }
+      &:hover { color: $ts-white; }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding-block: 2rem !important;
+    
+    .ts-social-icon {
+      width: 2rem;
+      height: 2rem;
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+    
+    .ts-copyright-bar {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
     }
   }
 }
 
-// ---------------------------------------------------------
-// Menú móvil (Offcanvas premium)
-// ---------------------------------------------------------
+// Menú móvil (offcanvas)
 .ts-mobile-menu {
   background-color: $ts-dark-bg !important;
   border-left: 1px solid rgba($ts-white, 0.08) !important;
@@ -814,7 +606,7 @@ p.text-ts-muted {
     }
 
     a {
-      font-family: $font-family-sans; // Montserrat, igual a la nav bar de escritorio
+      font-family: $font-family-sans; 
       font-size: 1.15rem;
       font-weight: 700;
       letter-spacing: 0.1em;

@@ -136,34 +136,93 @@
   /* -----------------------------------------------------
    * 6. Catálogo: filtros en vivo (solo corre si la grilla existe)
    *    Combina checkboxes (categoría / disponibilidad / color)
-   *    con el buscador de texto. Todo client-side: no hay
-   *    backend en este TP, pero el filtrado es funcional real,
-   *    no decorativo.
+   *    con el buscador de texto y el rango de precio. Todo client-side.
    * --------------------------------------------------- */
   const grilla = document.getElementById("ts-grilla-productos");
 
   if (grilla) {
-    const tarjetas = Array.from(grilla.querySelectorAll("[data-categoria]"));
+    let tarjetas = Array.from(grilla.querySelectorAll("[data-categoria]"));
     const buscador = document.getElementById("ts-buscador");
     const contador = document.getElementById("ts-contador");
     const sinResultados = document.getElementById("ts-sin-resultados");
     const limpiarBtn = document.getElementById("ts-limpiar-filtros");
+    const precioRango = document.getElementById("ts-precio-rango");
+    const precioMaxVal = document.getElementById("ts-precio-max-val");
+
+    // Configuración de paginación
+    const PRODUCTS_PER_PAGE = 6;
+    let currentPage = 1;
+    let filteredTarjetas = [];
 
     const checkedValues = (grupo) =>
       Array.from(document.querySelectorAll(`input[data-filter="${grupo}"]:checked`)).map((el) => el.value);
+
+    // Muestra solo los productos de la página actual
+    const mostrarPagina = (page) => {
+      currentPage = page;
+      const startIdx = (currentPage - 1) * PRODUCTS_PER_PAGE;
+      const endIdx = startIdx + PRODUCTS_PER_PAGE;
+
+      // Ocultar todos
+      tarjetas.forEach((tarjeta) => {
+        tarjeta.classList.add("d-none");
+      });
+
+      // Mostrar solo los correspondientes a la página actual
+      filteredTarjetas.slice(startIdx, endIdx).forEach((tarjeta) => {
+        tarjeta.classList.remove("d-none");
+      });
+
+      renderizarPaginacion();
+    };
+
+    // Renderiza dinámicamente los números de página
+    const renderizarPaginacion = () => {
+      const paginacionUl = document.querySelector(".ts-pagination-custom");
+      if (!paginacionUl) return;
+
+      paginacionUl.innerHTML = "";
+
+      const totalPages = Math.ceil(filteredTarjetas.length / PRODUCTS_PER_PAGE);
+      if (totalPages <= 1) {
+        paginacionUl.classList.add("d-none");
+        return;
+      }
+
+      paginacionUl.classList.remove("d-none");
+
+      for (let i = 1; i <= totalPages; i++) {
+        const li = document.createElement("li");
+        li.className = `page-item ${i === currentPage ? "active" : ""}`;
+
+        const span = document.createElement("span");
+        span.className = "page-link";
+        span.style.cursor = "pointer";
+        span.textContent = i;
+        span.addEventListener("click", () => {
+          mostrarPagina(i);
+          window.scrollTo({ top: 300, behavior: "smooth" });
+        });
+
+        li.appendChild(span);
+        paginacionUl.appendChild(li);
+      }
+    };
 
     const aplicarFiltros = () => {
       const categorias = checkedValues("categoria");
       const disponibilidades = checkedValues("disponibilidad");
       const colores = checkedValues("color");
       const texto = (buscador?.value || "").trim().toLowerCase();
+      const precioMaximo = precioRango ? parseFloat(precioRango.value) : Infinity;
 
-      let visibles = 0;
+      filteredTarjetas = [];
 
       tarjetas.forEach((tarjeta) => {
         const cat = tarjeta.dataset.categoria;
         const disp = tarjeta.dataset.disponibilidad.split(" ");
         const color = tarjeta.dataset.color;
+        const precio = parseFloat(tarjeta.dataset.precio || 0);
         const titulo = tarjeta.textContent.toLowerCase();
 
         // Selección vacía en un grupo = ese filtro no restringe (se muestran todas)
@@ -171,14 +230,19 @@
         const pasaDisponibilidad = disponibilidades.length === 0 || disp.some((d) => disponibilidades.includes(d));
         const pasaColor = colores.length === 0 || colores.includes(color);
         const pasaTexto = texto === "" || titulo.includes(texto);
+        const pasaPrecio = precio === 0 || precio <= precioMaximo;
 
-        const visible = pasaCategoria && pasaDisponibilidad && pasaColor && pasaTexto;
-        tarjeta.classList.toggle("d-none", !visible);
-        if (visible) visibles += 1;
+        const visible = pasaCategoria && pasaDisponibilidad && pasaColor && pasaTexto && pasaPrecio;
+        if (visible) {
+          filteredTarjetas.push(tarjeta);
+        }
       });
 
-      if (contador) contador.textContent = visibles;
-      if (sinResultados) sinResultados.classList.toggle("d-none", visibles !== 0);
+      if (contador) contador.textContent = filteredTarjetas.length;
+      if (sinResultados) sinResultados.classList.toggle("d-none", filteredTarjetas.length !== 0);
+
+      // Resetear a la página 1 al aplicar cualquier filtro
+      mostrarPagina(1);
     };
 
     document.querySelectorAll('#ts-filtros input[data-filter]').forEach((input) => {
@@ -189,14 +253,65 @@
       buscador.addEventListener("input", aplicarFiltros);
     }
 
+    if (precioRango) {
+      precioRango.addEventListener("input", () => {
+        if (precioMaxVal) {
+          precioMaxVal.textContent = `$${parseFloat(precioRango.value).toLocaleString("es-AR")}`;
+        }
+        aplicarFiltros();
+      });
+    }
+
     if (limpiarBtn) {
       limpiarBtn.addEventListener("click", () => {
         document.querySelectorAll('#ts-filtros input[data-filter="categoria"]').forEach((el) => (el.checked = true));
         document.querySelectorAll('#ts-filtros input[data-filter="disponibilidad"]').forEach((el) => (el.checked = true));
         document.querySelectorAll('#ts-filtros input[data-filter="color"]').forEach((el) => (el.checked = false));
         if (buscador) buscador.value = "";
+        if (precioRango) {
+          precioRango.value = "900000";
+          if (precioMaxVal) {
+            precioMaxVal.textContent = "$900.000";
+          }
+        }
         aplicarFiltros();
       });
+    }
+
+    const ordenarProductos = () => {
+      const criterio = document.getElementById("ts-orden")?.value;
+      if (!criterio) return;
+
+      const items = Array.from(grilla.querySelectorAll("article"));
+
+      items.sort((a, b) => {
+        const precioA = parseFloat(a.dataset.precio || 0);
+        const precioB = parseFloat(b.dataset.precio || 0);
+        const tituloA = a.querySelector(".ts-card-title-serif")?.textContent.toLowerCase() || "";
+        const tituloB = b.querySelector(".ts-card-title-serif")?.textContent.toLowerCase() || "";
+
+        if (criterio === "precio-asc") {
+          return precioA - precioB;
+        } else if (criterio === "precio-desc") {
+          return precioB - precioA;
+        } else {
+          // 'novedades' o 'relevantes': ordenar alfabéticamente por título
+          return tituloA.localeCompare(tituloB);
+        }
+      });
+
+      // Reinsertar en el DOM con el nuevo orden
+      items.forEach((item) => grilla.appendChild(item));
+
+      // Releer las tarjetas para que la paginación las recorra en el orden correcto
+      tarjetas = Array.from(grilla.querySelectorAll("[data-categoria]"));
+      aplicarFiltros();
+    };
+
+    const ordenSelect = document.getElementById("ts-orden");
+    if (ordenSelect) {
+      ordenSelect.addEventListener("change", ordenarProductos);
+      ordenarProductos(); // orden inicial
     }
 
     aplicarFiltros();
@@ -231,7 +346,7 @@
   }
 
   // =========================================================
-  // LÓGICA DE PRODUCTO: Selector dinámico de precio
+  // Selector dinámico de precios para productos
   // =========================================================
 
   document.addEventListener('DOMContentLoaded', () => {

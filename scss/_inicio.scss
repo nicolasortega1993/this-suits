@@ -1,0 +1,306 @@
+// Estilos exclusivos de la página de Inicio
+
+// Hero
+.ts-hero {
+  background-image: linear-gradient(rgba($ts-dark-bg, 0.75), rgba($ts-dark-bg, 0.75)), url('../img/Trajes-de-hombre.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: $ts-white;
+  padding-block: clamp(6rem, 12vw, 11rem); // Mayor padding para dar impacto visual a la foto
+  text-align: center;
+
+  h1 {
+    font-family: $font-family-serif;
+    font-size: clamp(2.8rem, 7vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .lead {
+    font-family: $font-family-sans;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem); 
+    color: $ts-slate-400;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn {
+    font-family: $font-family-sans;
+    font-size: 0.95rem; 
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.9rem 2.5rem;
+    text-transform: uppercase;
+  }
+}
+
+// Pasos del proceso ("Así de simple funciona")
+.ts-step-item {
+  text-align: left;
+  
+  .ts-step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .ts-step-number {
+    width: 2.5rem; 
+    height: 2.5rem; 
+    border-radius: 50%;
+    background-color: $ts-red-700;
+    color: $ts-white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-family-sans;
+    font-weight: 700;
+    font-size: 1rem; 
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-family: $font-family-sans;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: $ts-white;
+  }
+
+  p {
+    font-family: $font-family-sans;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: $ts-slate-400;
+    margin-bottom: 0;
+  }
+}
+
+// Testimonios
+.ts-testimonial-card {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: $ts-white;
+
+  .ts-quote-icon {
+    font-size: 3rem;
+    font-family: Georgia, serif;
+    color: $ts-slate-400;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    opacity: 0.4;
+  }
+
+  p {
+    font-family: $font-family-sans;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: $ts-white;
+    margin-bottom: 1.5rem;
+  }
+
+  .ts-author-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .ts-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba($ts-white, 0.15);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: $ts-white;
+      font-family: $font-family-sans;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    span {
+      font-family: $font-family-sans;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: $ts-white;
+    }
+  }
+}
+
+// Sección alquiler (CTA)
+.ts-cta-banner {
+  background-color: $ts-white;
+  color: $ts-navy-950;
+
+  .ts-cta-category {
+    font-family: $font-family-sans;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: $ts-slate-700;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-family: $font-family-serif;
+    font-size: clamp(2.5rem, 5.5vw, 3.8rem);
+    font-weight: 800 !important; //en negrita
+    color: $ts-navy-950;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .ts-cta-highlight {
+    color: $ts-red-700;
+  }
+
+  p {
+    font-family: $font-family-sans;
+    font-size: 1.2rem;
+    color: $ts-slate-700;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .ts-cta-list {
+    font-family: $font-family-sans;
+    font-size: 1.1rem;
+    color: $ts-navy-950;
+    margin-bottom: 2rem;
+    padding-left: 0;
+
+    li {
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+
+      svg {
+        color: $ts-red-700;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  .btn-primary {
+    background-color: $ts-red-700;
+    border-color: $ts-red-700;
+    font-family: $font-family-sans;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 1.1rem 3.5rem;
+    text-transform: uppercase;
+    border-radius: 0;
+    transition: all 0.25s ease;
+
+    &:hover {
+      background-color: darken($ts-red-700, 6%);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba($ts-red-700, 0.3);
+    }
+  }
+
+  .ts-placeholder {
+    min-height: 380px;
+  }
+}
+
+// Sección de confianza
+.ts-trust-strip {
+  background-color: $ts-navy-800;
+  color: $ts-white;
+  font-family: $font-family-sans;
+  border-top: 1px solid $ts-dark-border;
+  border-bottom: 1px solid $ts-dark-border;
+
+  .ts-trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-block: 1.25rem;
+    text-align: center;
+
+    p {
+      margin-bottom: 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: $ts-slate-400;
+    }
+
+    span {
+      font-size: 0.85rem;
+      color: $ts-white;
+      font-weight: 400;
+    }
+  }
+
+  // Grupo de avatares de reseñas de Google
+  .ts-avatar-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ts-trust-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid $ts-navy-800;
+    margin-left: -8px;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:hover {
+      transform: translateY(-3px) scale(1.1);
+      z-index: 10;
+    }
+  }
+
+  .ts-stars-group {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  .ts-star-icon {
+    width: 18px;
+    height: 18px;
+    fill: #FFB300;
+    filter: drop-shadow(0 0 2px rgba(255, 179, 0, 0.4));
+  }
+
+  .ts-trust-brand-icon {
+    height: 34px;
+    width: auto;
+    opacity: 0.95;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  // Divisor diagonal en desktop
+  .ts-divider-diagonal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $ts-slate-700;
+    font-weight: 300;
+    font-size: 1.75rem;
+  }
+}
