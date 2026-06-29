@@ -1,0 +1,267 @@
+// =========================================================
+// THIS SUITS — _alquiler.scss
+// Estilos exclusivos para la página de Alquiler de prendas
+// =========================================================
+
+.ts-alquiler-hero {
+  background-image: linear-gradient(rgba($ts-navy-950, 0.85), rgba($ts-navy-950, 0.85)), url('../img/alquiler-traje.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid $ts-navy-700;
+  padding-block: 4.5rem;
+  text-align: center;
+
+  @media (max-width: 1024px) {
+    padding-block: 3.2rem;
+  }
+
+  @media (max-width: 768px) {
+    padding-block: 2.5rem;
+  }
+
+  @media (max-width: 576px) {
+    padding-block: 2rem;
+  }
+  
+  h1 {
+    font-family: $font-family-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    color: $ts-white;
+    margin-bottom: 0.5rem;
+    text-transform: none;
+  }
+  
+  p {
+    font-family: $font-family-sans;
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    color: $ts-slate-400;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+}
+
+// Tarjeta de vista previa interactiva de la prenda
+.ts-preview-card {
+  border: 1px solid rgba($ts-navy-950, 0.1);
+  background-color: $ts-white;
+  box-shadow: 0 4px 20px rgba($ts-navy-950, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba($ts-navy-950, 0.1);
+  }
+  
+  .ts-preview-image-wrapper {
+    background-color: #F8FAFC;
+    border-bottom: 1px solid rgba($ts-navy-950, 0.08);
+    padding: 2rem;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      transition: transform 0.5s ease, opacity 0.15s ease;
+    }
+  }
+  
+  .ts-preview-body {
+    padding: 1.5rem;
+  }
+  
+  .ts-preview-badge {
+    display: inline-block;
+    font-family: $font-family-sans;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $ts-white;
+    background-color: $ts-navy-950;
+    padding: 0.25rem 0.6rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .ts-preview-title {
+    font-family: $font-family-serif;
+    font-size: 1.85rem;
+    font-weight: 700 !important;
+    color: $ts-navy-950;
+    margin-bottom: 0.25rem;
+  }
+  
+  .ts-preview-desc {
+    color: $ts-slate-700;
+    font-family: $font-family-sans;
+  }
+  
+  .ts-preview-price-box {
+    border-top: 1px dashed rgba($ts-navy-950, 0.15);
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ts-preview-price-label {
+    font-family: $font-family-sans;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: $ts-slate-700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .ts-preview-price-value {
+    font-family: $font-family-serif;
+    font-size: 2.6rem;
+    font-weight: 700 !important;
+    color: $ts-red-700;
+    line-height: 1.1;
+    margin-block: 0.2rem;
+  }
+  
+  .ts-preview-price-note {
+    font-family: $font-family-sans;
+    font-size: 0.75rem;
+    color: $ts-slate-700;
+    font-style: italic;
+  }
+}
+
+// Panel de pasos del alquiler (Cómo funciona)
+.ts-info-panel {
+  background-color: $ts-navy-950;
+  color: $ts-white;
+  border: 1px solid $ts-navy-700;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  
+  .ts-info-title {
+    font-family: $font-family-serif;
+    font-size: 1.6rem;
+    color: $ts-white;
+    font-weight: 700 !important;
+    border-bottom: 1px solid rgba($ts-white, 0.1);
+    padding-bottom: 0.75rem;
+  }
+  
+  .ts-steps-list {
+    li {
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+
+  .ts-step-number {
+    width: 2.2rem;
+    height: 2.2rem;
+    background-color: $ts-red-700;
+    color: $ts-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-family-sans;
+    font-weight: 700;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    border: 1px solid rgba($ts-white, 0.1);
+  }
+  
+  h4 {
+    color: $ts-white;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+  
+  p {
+    color: $ts-slate-400 !important;
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+}
+
+// Panel del Formulario de Alquiler
+.ts-form-panel {
+  background-color: $ts-white;
+  border: 1px solid rgba($ts-navy-950, 0.1);
+  box-shadow: 0 4px 20px rgba($ts-navy-950, 0.03);
+  
+  .ts-form-title {
+    font-family: $font-family-serif;
+    font-size: 2.6rem;
+    font-weight: 700 !important;
+    color: $ts-navy-950;
+  }
+  
+  .form-control, .form-select {
+    border: 1px solid rgba($ts-navy-950, 0.18);
+    font-family: $font-family-sans;
+    font-size: 0.88rem;
+    padding: 0.75rem 1rem;
+    color: $ts-navy-950;
+    transition: none;
+    border-radius: 0; // Bordes completamente rectos según TP1
+    
+    &:focus {
+      border-color: $ts-red-700;
+      box-shadow: 0 0 0 3px rgba($ts-red-700, 0.12);
+      outline: none;
+      background-color: $ts-white;
+    }
+
+    &::placeholder {
+      color: $ts-slate-700;
+      opacity: 0.5;
+    }
+  }
+  
+  .form-label {
+    font-family: $font-family-sans;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $ts-navy-950;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.02em;
+  }
+
+  // Estilos de validación personalizados en foco para que se vean muy bien
+  .form-control.is-invalid, .form-select.is-invalid {
+    border-color: #dc3545;
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(#dc3545, 0.12);
+    }
+  }
+
+  .form-control.is-valid, .form-select.is-valid {
+    border-color: #198754;
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(#198754, 0.12);
+    }
+  }
+  
+  .invalid-feedback {
+    font-family: $font-family-sans;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-top: 0.25rem;
+  }
+
+  h3 {
+    font-family: $font-family-serif !important;
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+    color: $ts-navy-950 !important;
+    text-transform: none !important;
+    letter-spacing: 0.01em !important;
+    border-bottom: 1px solid rgba($ts-navy-950, 0.15) !important;
+    padding-bottom: 0.5rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+}
